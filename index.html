@@ -1,0 +1,416 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100e1c">
+  <title>라미의 작은 밤하늘 ☾</title>
+
+  <style>
+    :root {
+      --bg: #100e1c;
+      --panel: #211b34;
+      --pink: #ff9bcf;
+      --pink-light: #ffc3e3;
+      --text: #f5f0fa;
+      --muted: #b9aecb;
+      --line: rgba(255, 190, 226, 0.2);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: system-ui, sans-serif;
+      line-height: 1.8;
+      background:
+        radial-gradient(ellipse at 15% 0%, #45305d 0%, transparent 38rem),
+        radial-gradient(ellipse at 90% 45%, #38203f 0%, transparent 30rem),
+        var(--bg);
+    }
+
+    a {
+      color: var(--pink-light);
+      text-decoration: none;
+    }
+
+    a:hover { color: white; }
+
+    .container {
+      width: min(920px, calc(100% - 32px));
+      margin: auto;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 0;
+    }
+
+    .logo {
+      color: var(--text);
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .logo span { color: var(--pink); }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 0.85rem;
+    }
+
+    nav a { color: var(--muted); }
+
+    .hero {
+      padding: 75px 20px;
+      text-align: center;
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background: rgba(31, 26, 48, 0.8);
+      box-shadow: 0 20px 60px #0003;
+    }
+
+    .moon {
+      color: var(--pink);
+      font-size: 2.5rem;
+      text-shadow: 0 0 25px #ff9bcf88;
+    }
+
+    .eyebrow {
+      color: var(--pink);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+    }
+
+    h1 {
+      margin: 8px 0;
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      line-height: 1.2;
+    }
+
+    .hero p {
+      max-width: 500px;
+      margin: 18px auto;
+      color: var(--muted);
+    }
+
+    .button {
+      display: inline-block;
+      margin: 5px;
+      padding: 8px 17px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: #ff9bcf12;
+    }
+
+    main { padding: 22px 0 45px; }
+
+    section {
+      margin-top: 34px;
+      scroll-margin-top: 20px;
+    }
+
+    .section-title {
+      margin-bottom: 15px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 1.4rem;
+    }
+
+    .section-title span {
+      margin-right: 8px;
+      color: var(--pink);
+      font-size: 0.85rem;
+    }
+
+    .section-title p {
+      margin: 2px 0;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #211b34c9;
+    }
+
+    .about {
+      padding: 24px;
+    }
+
+    .about p { margin: 0 0 12px; }
+
+    .label {
+      color: var(--pink);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .chip {
+      padding: 3px 11px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .music-grid,
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .music-card { padding: 12px; }
+
+    .cover {
+      display: grid;
+      place-items: center;
+      aspect-ratio: 1;
+      overflow: hidden;
+      border-radius: 12px;
+      background:
+        radial-gradient(circle at 30% 25%, #805181, transparent 45%),
+        linear-gradient(145deg, #382748, #171626);
+      color: var(--pink-light);
+      font-size: 3.5rem;
+    }
+
+    .cover img,
+    .gallery-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .music-card h3 {
+      margin: 10px 0 0;
+      font-size: 1rem;
+    }
+
+    .artist {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .song-link { font-size: 0.85rem; }
+
+    .gallery-item { overflow: hidden; }
+
+    .gallery-image {
+      aspect-ratio: 4 / 3;
+      background: linear-gradient(135deg, #49304e, #202039);
+    }
+
+    .placeholder {
+      display: grid;
+      place-items: center;
+      aspect-ratio: 4 / 3;
+      background:
+        radial-gradient(circle, #ff9bcf22, transparent 60%),
+        linear-gradient(135deg, #382748, #171626);
+      color: var(--pink-light);
+      font-size: 2rem;
+    }
+
+    .caption { padding: 10px 13px; }
+
+    .caption strong {
+      display: block;
+      font-size: 0.9rem;
+    }
+
+    .caption span {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .links { padding: 16px; }
+
+    footer {
+      padding: 20px 0 35px;
+      color: #82788f;
+      text-align: center;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      nav { gap: 13px; }
+
+      .hero { padding: 55px 16px; }
+
+      .music-grid,
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .music-card { padding: 9px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <header>
+      <a class="logo" href="#home">rami<span>✦</span>space</a>
+
+      <nav>
+        <a href="#about">ABOUT</a>
+        <a href="#music">MUSIC</a>
+        <a href="#gallery">GALLERY</a>
+        <a href="#links">LINKS</a>
+      </nav>
+    </header>
+
+    <section class="hero" id="home">
+      <div class="moon">☾</div>
+      <div class="eyebrow">WELCOME TO MY LITTLE UNIVERSE</div>
+      <h1>안녕, 나는 라미.</h1>
+      <p>별빛과 음악, 그리고 좋아하는 것들을 천천히 모아두는 작은 공간이에요.</p>
+
+      <a class="button" href="#about">ABOUT ME ↘</a>
+      <a class="button" href="#music">MY MUSIC ♫</a>
+    </section>
+
+    <main>
+      <section id="about">
+        <div class="section-title">
+          <h2><span>01</span> ABOUT ME</h2>
+          <p>조금 더 나에 대해</p>
+        </div>
+
+        <div class="panel about">
+          <p>안녕하세요! 여기는 라미의 작은 밤하늘이에요. 🌙</p>
+          <p>음악을 듣고, 좋아하는 게임과 캐릭터를 구경하고, 마음에 드는 것들을 모으는 걸 좋아해요.</p>
+          <p>편하게 둘러보고 가세요. 이곳은 제가 좋아하는 것들을 기록하는 공간입니다.</p>
+
+          <div class="label">A FEW FAVORITES</div>
+          <div class="chips">
+            <span class="chip">J-pop</span>
+            <span class="chip">Vocaloid</span>
+            <span class="chip">Games</span>
+            <span class="chip">Night sky</span>
+            <span class="chip">Illustrations</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="music">
+        <div class="section-title">
+          <h2><span>02</span> MUSIC I LOVE</h2>
+          <p>좋아하는 노래와 앨범 커버</p>
+        </div>
+
+        <div class="music-grid">
+
+          <!-- MUSIC CARD 1: 아래 제목, 아티스트, 링크를 수정하세요 -->
+          <article class="panel music-card">
+            <div class="cover">♫</div>
+            <h3>좋아하는 노래 01</h3>
+            <p class="artist">아티스트 이름</p>
+            <a class="song-link" href="https://www.youtube.com/" target="_blank" rel="noopener">노래 듣기 ↗</a>
+          </article>
+
+          <!-- MUSIC CARD 2 -->
+          <article class="panel music-card">
+            <div class="cover">✧</div>
+            <h3>좋아하는 노래 02</h3>
+            <p class="artist">아티스트 이름</p>
+            <a class="song-link" href="https://www.youtube.com/" target="_blank" rel="noopener">노래 듣기 ↗</a>
+          </article>
+
+          <!-- MUSIC CARD 3 -->
+          <article class="panel music-card">
+            <div class="cover">☾</div>
+            <h3>좋아하는 노래 03</h3>
+            <p class="artist">아티스트 이름</p>
+            <a class="song-link" href="https://www.youtube.com/" target="_blank" rel="noopener">노래 듣기 ↗</a>
+          </article>
+
+        </div>
+      </section>
+
+      <section id="gallery">
+        <div class="section-title">
+          <h2><span>03</span> LITTLE GALLERY</h2>
+          <p>내가 고른 이미지들</p>
+        </div>
+
+        <div class="gallery-grid">
+
+          <!-- GALLERY IMAGE 1 -->
+          <article class="panel gallery-item">
+            <div class="placeholder">✦</div>
+            <div class="caption">
+              <strong>별이 빛나는 밤</strong>
+              <span>마음에 드는 이미지</span>
+            </div>
+          </article>
+
+          <!-- GALLERY IMAGE 2 -->
+          <article class="panel gallery-item">
+            <div class="placeholder">☾</div>
+            <div class="caption">
+              <strong>좋아하는 분위기</strong>
+              <span>사진이나 일러스트</span>
+            </div>
+          </article>
+
+          <!-- GALLERY IMAGE 3 -->
+          <article class="panel gallery-item">
+            <div class="placeholder">♡</div>
+            <div class="caption">
+              <strong>소중한 취향</strong>
+              <span>나만의 작은 기록</span>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <section id="links">
+        <div class="section-title">
+          <h2><span>04</span> FIND ME</h2>
+          <p>다른 곳에서도 만나요</p>
+        </div>
+
+        <div class="panel links">
+          <!-- 아래 주소를 본인의 공개 프로필 주소로 바꾸세요 -->
+          <a class="button" href="https://x.com/" target="_blank" rel="noopener">X / Twitter ↗</a>
+          <a class="button" href="#home">BACK TO TOP ↑</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>made with ♡ by 라미 · under the same sky</footer>
+  </div>
+</body>
+</html>
