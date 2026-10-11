@@ -22,16 +22,38 @@
 
     html { scroll-behavior: smooth; }
 
-    body {
-      margin: 0;
-      color: var(--text);
-      font-family: system-ui, sans-serif;
-      line-height: 1.8;
-      background:
-        radial-gradient(ellipse at 15% 0%, #45305d 0%, transparent 38rem),
-        radial-gradient(ellipse at 90% 45%, #38203f 0%, transparent 30rem),
-        var(--bg);
-    }
+body {
+  margin: 0;
+  color: var(--text);
+  font-family: system-ui, sans-serif;
+  line-height: 1.8;
+  background: var(--bg);
+  isolation: isolate;
+}
+
+/* 화면 전체에 고정되는 배경 사진 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -8px;
+  z-index: -2;
+  background-image: url("images/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(5px);
+  pointer-events: none;
+}
+
+/* 사진 위에 어두운 막을 씌워 글씨가 잘 보이게 */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: rgba(16, 14, 28, 0.55);
+  pointer-events: none;
+}
 
     a {
       color: var(--pink-light);
