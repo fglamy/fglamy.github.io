@@ -22,38 +22,38 @@
 
     html { scroll-behavior: smooth; }
 
-body {
-  margin: 0;
-  color: var(--text);
-  font-family: system-ui, sans-serif;
-  line-height: 1.8;
-  background: var(--bg);
-  isolation: isolate;
-}
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: system-ui, sans-serif;
+      line-height: 1.8;
+      background: var(--bg);
+      isolation: isolate;
+    }
 
-/* 화면 전체에 고정되는 배경 사진 */
-body::before {
-  content: "";
-  position: fixed;
-  inset: -8px;
-  z-index: -2;
-  background-image: url("images/background.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  filter: blur(2px);
-  pointer-events: none;
-}
+    /* 화면 전체에 고정되는 배경 */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -8px;
+      z-index: -2;
+      background-image: url("images/background.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: blur(2px);
+      pointer-events: none;
+    }
 
-/* 사진 위에 어두운 막을 씌워 글씨가 잘 보이게 */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background: rgba(16, 14, 28, 0.55);
-  pointer-events: none;
-}
+    /* 배경을 어둡게 덮기 */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: rgba(16, 14, 28, 0.55);
+      pointer-events: none;
+    }
 
     a {
       color: var(--pink-light);
@@ -141,9 +141,7 @@ body::after {
       scroll-margin-top: 20px;
     }
 
-    .section-title {
-      margin-bottom: 15px;
-    }
+    .section-title { margin-bottom: 15px; }
 
     .section-title h2 {
       margin: 0;
@@ -165,14 +163,35 @@ body::after {
     .panel {
       border: 1px solid var(--line);
       border-radius: 18px;
-      background: #211b34c9;
+      background: #211b34e8;
     }
 
-    .about {
-      padding: 24px;
+    /* 소개글: 왼쪽 글, 오른쪽 이미지 */
+    .about { padding: 24px; }
+
+    .about-layout {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .about-text {
+      flex: 1;
+      min-width: 0;
     }
 
     .about p { margin: 0 0 12px; }
+
+    .about-image {
+      display: block;
+      width: 180px;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      object-position: center;
+      flex-shrink: 0;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
 
     .label {
       color: var(--pink);
@@ -195,6 +214,7 @@ body::after {
       font-size: 0.8rem;
     }
 
+    /* 음악 카드와 갤러리 */
     .music-grid,
     .gallery-grid {
       display: grid;
@@ -202,7 +222,10 @@ body::after {
       gap: 14px;
     }
 
-    .music-card { padding: 12px; }
+    .music-card {
+      padding: 12px;
+      min-width: 0;
+    }
 
     .cover {
       display: grid;
@@ -217,8 +240,7 @@ body::after {
       font-size: 3.5rem;
     }
 
-    .cover img,
-    .gallery-image {
+    .cover img {
       display: block;
       width: 100%;
       height: 100%;
@@ -238,22 +260,18 @@ body::after {
 
     .song-link { font-size: 0.85rem; }
 
-    .gallery-item { overflow: hidden; }
-
-    .gallery-image {
-      aspect-ratio: 4 / 3;
-      background: linear-gradient(135deg, #49304e, #202039);
+    .gallery-item {
+      min-width: 0;
+      overflow: hidden;
     }
 
-    .placeholder {
-      display: grid;
-      place-items: center;
+    .gallery-image {
+      display: block;
+      width: 100%;
+      height: auto;
       aspect-ratio: 4 / 3;
-      background:
-        radial-gradient(circle, #ff9bcf22, transparent 60%),
-        linear-gradient(135deg, #382748, #171626);
-      color: var(--pink-light);
-      font-size: 2rem;
+      object-fit: cover;
+      background: linear-gradient(135deg, #49304e, #202039);
     }
 
     .caption { padding: 10px 13px; }
@@ -272,11 +290,12 @@ body::after {
 
     footer {
       padding: 20px 0 35px;
-      color: #82788f;
+      color: #b9aecb;
       text-align: center;
       font-size: 0.8rem;
     }
 
+    /* 모바일 화면 대응 */
     @media (max-width: 600px) {
       header {
         align-items: flex-start;
@@ -286,6 +305,21 @@ body::after {
       nav { gap: 13px; }
 
       .hero { padding: 55px 16px; }
+
+      .about { padding: 18px; }
+
+      .about-layout {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 20px;
+      }
+
+      .about-image {
+        width: 100%;
+        max-width: 260px;
+        aspect-ratio: 4 / 3;
+        align-self: center;
+      }
 
       .music-grid,
       .gallery-grid {
@@ -323,28 +357,44 @@ body::after {
     </section>
 
     <main>
+      <!-- ABOUT ME -->
       <section id="about">
         <div class="section-title">
           <h2><span>01</span> ABOUT ME</h2>
         </div>
 
         <div class="panel about">
-          <p>여러가지 잔뜩 하는 대학생✨</p>
-          <p>ISFP 극 I지만 먼저 다가오면 매우 좋아해요... 💜</p>
-          <p>게임, 음악, 그림 등 좋아하는 장르는 매우 많음! 🌙</p>
-          <p>특히 음악(jpop)을 엄청 좋아해서 매일 듣고 유튜브 보기 ㅎㅎ</p>
-          <p>저랑 취향이 같다면 같이 이야기 나누면 좋겠어요.</p>
+          <div class="about-layout">
 
-          <div class="label">A FEW FAVORITES</div>
-          <div class="chips">
-            <span class="chip">J-pop</span>
-            <span class="chip">우타이테</span>
-            <span class="chip">Games</span>
-            <span class="chip">Illustrations</span>
+            <div class="about-text">
+              <p>여러가지 잔뜩 하는 대학생✨</p>
+              <p>ISFP 극 I지만 먼저 다가오면 매우 좋아해요... 💜</p>
+              <p>게임, 음악, 그림 등 좋아하는 장르는 매우 많음! 🌙</p>
+              <p>특히 음악(jpop)을 엄청 좋아해서 매일 듣고 유튜브 보기 ㅎㅎ</p>
+              <p>저랑 취향이 같다면 같이 이야기 나누면 좋겠어요.</p>
+
+              <div class="label">A FEW FAVORITES</div>
+              <div class="chips">
+                <span class="chip">J-pop</span>
+                <span class="chip">우타이테</span>
+                <span class="chip">Games</span>
+                <span class="chip">Illustrations</span>
+              </div>
+            </div>
+
+            <!-- 소개글 오른쪽 이미지 -->
+            <img
+              class="about-image"
+              src="images/profile.jpg"
+              alt="라미의 프로필 이미지"
+              loading="lazy"
+            >
+
           </div>
         </div>
       </section>
 
+      <!-- MUSIC -->
       <section id="music">
         <div class="section-title">
           <h2><span>02</span> MUSIC I LOVE</h2>
@@ -353,25 +403,28 @@ body::after {
 
         <div class="music-grid">
 
-          <!-- MUSIC CARD 1: 아래 제목, 아티스트, 링크를 수정하세요 -->
           <article class="panel music-card">
-            <div class="cover">♫</div>
+            <div class="cover">
+              <img src="images/song01.jpg" alt="Cry for the Moon 앨범 커버" loading="lazy">
+            </div>
             <h3>Cry for the Moon</h3>
             <p class="artist">Shiho</p>
             <a class="song-link" href="https://youtu.be/agvvzNZf_MM?si=bGeQlXhcWV0avPTp" target="_blank" rel="noopener">노래 듣기 ↗</a>
           </article>
 
-          <!-- MUSIC CARD 2 -->
           <article class="panel music-card">
-            <div class="cover">✧</div>
+            <div class="cover">
+              <img src="images/song02.jpg" alt="Latency 앨범 커버" loading="lazy">
+            </div>
             <h3>Latency</h3>
             <p class="artist">esoragoto</p>
             <a class="song-link" href="https://youtu.be/erBbE_JNf4Y?si=loK0cMCG1q0NUvOo" target="_blank" rel="noopener">노래 듣기 ↗</a>
           </article>
 
-          <!-- MUSIC CARD 3 -->
           <article class="panel music-card">
-            <div class="cover">☾</div>
+            <div class="cover">
+              <img src="images/song03.jpg" alt="세 번째 좋아하는 노래의 앨범 커버" loading="lazy">
+            </div>
             <h3>좋아하는 노래 03</h3>
             <p class="artist">아티스트 이름</p>
             <a class="song-link" href="https://www.youtube.com/" target="_blank" rel="noopener">노래 듣기 ↗</a>
@@ -380,6 +433,7 @@ body::after {
         </div>
       </section>
 
+      <!-- GALLERY -->
       <section id="gallery">
         <div class="section-title">
           <h2><span>03</span> LITTLE GALLERY</h2>
@@ -388,27 +442,24 @@ body::after {
 
         <div class="gallery-grid">
 
-          <!-- GALLERY IMAGE 1 -->
           <article class="panel gallery-item">
-            <div class="placeholder">✦</div>
+            <img class="gallery-image" src="images/denia.jpg" alt="데니아" loading="lazy">
             <div class="caption">
               <strong>데니아 🩷</strong>
               <span>명조</span>
             </div>
           </article>
 
-          <!-- GALLERY IMAGE 2 -->
           <article class="panel gallery-item">
-            <div class="placeholder">☾</div>
+            <img class="gallery-image" src="images/haruka.jpg" alt="하루카" loading="lazy">
             <div class="caption">
               <strong>하루카 🧡</strong>
               <span>명일방주</span>
             </div>
           </article>
 
-          <!-- GALLERY IMAGE 3 -->
           <article class="panel gallery-item">
-            <div class="placeholder">♡</div>
+            <img class="gallery-image" src="images/kuro.jpg" alt="쿠로" loading="lazy">
             <div class="caption">
               <strong>쿠로 💙</strong>
               <span>뉴럴 클라우드</span>
@@ -418,6 +469,7 @@ body::after {
         </div>
       </section>
 
+      <!-- LINKS -->
       <section id="links">
         <div class="section-title">
           <h2><span>04</span> FIND ME</h2>
@@ -425,7 +477,6 @@ body::after {
         </div>
 
         <div class="panel links">
-          <!-- 아래 주소를 본인의 공개 프로필 주소로 바꾸세요 -->
           <a class="button" href="https://x.com/Lamy__s" target="_blank" rel="noopener">X / Twitter 1 ↗</a>
           <a class="button" href="https://x.com/xeitla_" target="_blank" rel="noopener">X / Twitter 2 ↗</a>
           <a class="button" href="#home">BACK TO TOP ↑</a>
