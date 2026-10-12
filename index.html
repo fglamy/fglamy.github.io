@@ -161,17 +161,42 @@
     }
 
     .panel {
-  border: 1px solid rgba(255, 155, 207, 0.55);
+  border: 1px solid rgba(255, 180, 200, 0.8);
   border-radius: 18px;
-  background: rgba(48, 38, 65, 0.94);
 
+  /* 연분홍색 블록 배경 */
+  background: rgba(255, 225, 230, 0.96);
+
+  /* 은은한 분홍빛 광택 */
   box-shadow:
-    0 0 5px rgba(255, 155, 207, 0.20),
-    0 0 12px rgba(255, 155, 207, 0.12),
-    0 8px 24px rgba(0, 0, 0, 0.15);
+    0 0 5px rgba(255, 155, 190, 0.25),
+    0 0 12px rgba(255, 155, 190, 0.15),
+    0 8px 24px rgba(0, 0, 0, 0.12);
 
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  /* 연분홍 배경에 맞춘 글자색 */
+  color: #49303d;
     }
+    /* 연분홍 블록 안의 글자색 */
+.panel .artist,
+.panel .caption span {
+  color: #795568;
+}
+
+.panel .song-link,
+.panel .caption strong {
+  color: #49303d;
+}
+
+.panel .chip {
+  color: #795568;
+  border-color: rgba(150, 90, 120, 0.25);
+}
+
+.panel a:hover {
+  color: #c04f88;
+}
 
     /* 소개글: 왼쪽 글, 오른쪽 이미지 */
     .about { padding: 24px; }
